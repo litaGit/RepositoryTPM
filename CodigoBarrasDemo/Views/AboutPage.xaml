@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CodigoBarrasDemo.Views.AboutPage"
+             xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:vm="clr-namespace:CodigoBarrasDemo.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <zxing:ZXingScannerView 
+            VerticalOptions="FillAndExpand" 
+            HorizontalOptions="Fill"
+            IsAnalyzing="true"
+            Result="{Binding ResultBarcode,Mode=TwoWay}"
+            ScanResultCommand="{Binding OpenWebCommand}"
+            Grid.Row="0"
+            Grid.Column="0"
+            IsScanning="true"
+            WidthRequest="350" 
+            HeightRequest="350">
+            
+        </zxing:ZXingScannerView>
+        <Frame Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="Código" FontSize="Title"/>
+                <Entry Text="{Binding DataEntry,Mode=TwoWay}" TextTransform="Uppercase">
+                    <Entry.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Entry.Keyboard>
+                </Entry>
+                <Button Margin="0,10,0,0" Text="BUSCAR"
+                        Command="{Binding ScanPageCommand}"
+                        BackgroundColor="#22398C"
+                        TextColor="White" />
+            </StackLayout>
+        </Frame>
+    </Grid>
+
+</ContentPage>

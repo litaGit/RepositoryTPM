@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CodigoBarrasDemo.Views.ScanDetail"
+             xmlns:local="clr-namespace:CodigoBarrasDemo.ViewModels"  
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:model="clr-namespace:CodigoBarrasDemo.Models" 
+             Title="Existencias">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="NameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="imageLableStackLayout" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
+
+            <Style x:Key="detailsStackLayout" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Spacing" Value="2" />
+            </Style>
+
+            <Style x:Key="imageStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="8" />
+                <Setter Property="HeightRequest" Value="8" />
+            </Style>
+
+            <Style x:Key="profileImageStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="80" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+
+            <Style x:Key="profileImageFrameStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="IsClippedToBounds" Value="True" />
+            </Style>
+
+            <Style x:Key="FrameCardViewStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="OutlineColor" Value="LightGray" />
+                <Setter Property="BorderColor" Value="LightGray" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="BackgroundColor" Value="#f8f8f8"/>
+            </Style>
+
+            <Style x:Key="FrameCardViewStyleHeader" TargetType="Frame">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="HasShadow" Value="True" />
+            </Style>
+
+            <Style x:Key="itemsCardViewStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Spacing" Value="8" />
+            </Style>
+
+            <Style x:Key="itemsInsideCardViewStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Spacing" Value="8" />
+            </Style>
+            <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="Red" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" Grid.Column="0">
+                <Frame HeightRequest="130" HorizontalOptions="Center" CornerRadius="5" Margin="0,10,0,0">
+                    <Image Source="{Binding Path= ImageProduct}" HeightRequest="150" WidthRequest="150"/>
+                </Frame>
+            </StackLayout>
+        </Grid>
+
+
+        <RefreshView  Grid.Row="1" Grid.Column="0"  x:DataType="local:ScanDetailViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <StackLayout >
+                <Frame Style="{StaticResource FrameCardViewStyle}">
+                    <StackLayout Style="{StaticResource itemsCardViewStackLayoutStyle}">
+                        <StackLayout Style="{StaticResource itemsInsideCardViewStackLayoutStyle}">
+                            <StackLayout Style="{StaticResource detailsStackLayout}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                                        <Label Text="{Binding ProductName}" FontSize="Medium" FontAttributes="Bold" TextColor="DarkBlue" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Padding="5,-5,0,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Almacen:" FontAttributes="Bold" FontSize="Medium" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" Margin="0,9,0,0"/>
+                                            <Picker Title="SELECCIONA UN ALMACÉN" 
+                                                    ItemsSource="{Binding Catalog}" 
+                                                    ItemDisplayBinding="{Binding NameStore}" 
+                                                    SelectedIndexChanged="Handle_SelectedIndexChanged" 
+                                                    SelectedItem="{Binding SelectedProduct}"
+                                                    HorizontalOptions="Center" 
+                                                    FontSize="Small" 
+                                                    Grid.Row="0" 
+                                                    Grid.Column="1" 
+                                                    WidthRequest="280">
+                                            </Picker>
+                                        </Grid>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Padding="5,-5,0,0">
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Codigo de barras: " FontAttributes="Bold" FontSize="Medium"/>
+                                                    <Span Text="{Binding BarCode}" FontSize="Medium" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="3" Grid.Column="0" Padding="5,-5,0,0" >
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Ubicación:" FontAttributes="Bold" 
+                                                   FontSize="Medium"
+                                                   Grid.Row="0" Grid.Column="0" 
+                                                   HorizontalTextAlignment="Center"
+                                                   HorizontalOptions="Center" 
+                                                   VerticalOptions="Center"/>
+                                            <Entry Text="{Binding LocationStoke}"
+                                                   TextTransform="Uppercase"
+                                                   FontAttributes="Bold"
+                                                   TextColor="DarkBlue"
+                                                   HorizontalOptions="Start"
+                                                   FontSize="Medium" 
+                                                   Grid.Row="0" Grid.Column="1" 
+                                                   WidthRequest="150" 
+                                                   Margin="0,-8,0,0" >
+                                                <Entry.Keyboard>
+                                                    <Keyboard x:FactoryMethod="Create">
+                                                        <x:Arguments>
+                                                            <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                                        </x:Arguments>
+                                                    </Keyboard>
+                                                </Entry.Keyboard>
+                                                <Entry.Behaviors>
+                                                    <xct:EventToCommandBehavior
+                                                        EventName="TextChanged"
+                                                        Command="{Binding TextChangeLocationCommand}"/>
+                                                </Entry.Behaviors>
+                                               
+                                            </Entry>
+                                        </Grid>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="3" Grid.Column="1" Padding="8,0,0,0" HorizontalOptions="EndAndExpand" >
+                                        <Grid ColumnSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <CheckBox Grid.Row="0" 
+                                                      Grid.Column="0"
+                                                      IsChecked="{Binding IsChecked, Mode=TwoWay}"
+                                                      HorizontalOptions="End">
+                                                <CheckBox.Behaviors>
+                                                    <xct:EventToCommandBehavior
+                                                        EventName="CheckedChanged"
+                                                        Command="{Binding CheckedChangeCommand}"/>
+                                                </CheckBox.Behaviors>
+                                            </CheckBox>
+                                            <Label Text="Etiquetas" Grid.Row="0" Grid.Column="1" FontSize="Small" Margin="0,5,0,0" LineBreakMode="WordWrap" HorizontalOptions="End"/>
+                                        </Grid>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Padding="5,-5,0,0">
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Existencia: " FontAttributes="Bold" FontSize="Medium"/>
+                                                    <Span Text="{Binding Existence}" FontSize="Medium" TextColor="DarkBlue" FontAttributes="Bold" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Padding="5,-5,0,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="Existencia real:" 
+                                                   FontAttributes="Bold" 
+                                                   FontSize="Medium" 
+                                                   Grid.Row="0" Grid.Column="0" 
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                            <Entry Text="{Binding NewExistence}"
+                                                   Placeholder="0"
+                                                   TextColor="DarkBlue"
+                                                   HorizontalOptions="Center"
+                                                   FontSize="Medium" 
+                                                   Grid.Row="0" Grid.Column="1" 
+                                                   WidthRequest="100" 
+                                                   Margin="0,-8,0,0" >
+                                                <Entry.Behaviors>
+                                                    <xct:EventToCommandBehavior
+                                                        EventName="TextChanged"
+                                                        Command="{Binding TextChangeCommand}"/>
+                                                    <xct:NumericValidationBehavior 
+                                                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                                        MinimumValue="0"
+                                                      />
+                                                </Entry.Behaviors>
+                                            </Entry>
+                                        </Grid>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Padding="5,-5,0,0">
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Total: " FontAttributes="Bold" FontSize="Medium"/>
+                                                    <Span Text="{Binding TotalAlmacen}" FontSize="Medium" TextColor="DarkBlue" FontAttributes="Bold" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Padding="5,-5,0,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Editor Placeholder="COMENTARIOS" 
+                                                    HorizontalOptions="Center"
+                                                    Text="{Binding Comentario}"
+                                                    TextTransform="Uppercase"
+                                                    FontSize="Medium" 
+                                                    Grid.Row="0" Grid.Column="0" 
+                                                    WidthRequest="370" 
+                                                    HeightRequest="65" 
+                                                    Margin="0,-8,0,0"  >
+                                                <Editor.Behaviors>
+                                                    <xct:EventToCommandBehavior
+                                                        EventName="TextChanged"
+                                                        Command="{Binding CommentChangeCommand}" />
+                                                </Editor.Behaviors>
+                                            </Editor>
+                                        </Grid>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button Text="GUARDAR" 
+                        BackgroundColor="#22398C" 
+                        TextColor="White"
+                        WidthRequest="150"
+                        HeightRequest="50"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Command="{Binding SaveInfoCommand}"
+                        IsEnabled="{Binding IsVisibleButton}" />
+
+            </StackLayout>
+        </RefreshView>
+
+    </StackLayout>
+</ContentPage>

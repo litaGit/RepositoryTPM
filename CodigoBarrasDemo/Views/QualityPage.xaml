@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CodigoBarrasDemo.Views.QualityPage"
+             Title="Calidad">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="NameLabel" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style x:Key="imageLableStackLayout" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
+
+            <Style x:Key="detailsStackLayout" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Spacing" Value="2" />
+            </Style>
+
+            <Style x:Key="imageStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="8" />
+                <Setter Property="HeightRequest" Value="8" />
+            </Style>
+
+            <Style x:Key="profileImageStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="80" />
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+
+            <Style x:Key="profileImageFrameStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="IsClippedToBounds" Value="True" />
+            </Style>
+
+            <Style x:Key="FrameCardViewStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="OutlineColor" Value="LightGray" />
+                <Setter Property="BorderColor" Value="LightGray" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="BackgroundColor" Value="#f8f8f8"/>
+            </Style>
+
+            <Style x:Key="FrameCardViewStyleHeader" TargetType="Frame">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="HasShadow" Value="True" />
+            </Style>
+
+            <Style x:Key="itemsCardViewStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Spacing" Value="8" />
+            </Style>
+
+            <Style x:Key="itemsInsideCardViewStackLayoutStyle" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Spacing" Value="8" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0">
+                    <Frame HeightRequest="180" HorizontalOptions="Center" CornerRadius="5" Margin="0,10,0,0">
+                        <Image Source="pieza_image.png" HeightRequest="180"/>
+                    </Frame>
+                </StackLayout>
+
+                <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FrameCardViewStyle}">
+                    <StackLayout Style="{StaticResource itemsCardViewStackLayoutStyle}">
+                        <StackLayout Style="{StaticResource itemsInsideCardViewStackLayoutStyle}">
+                            <StackLayout Style="{StaticResource detailsStackLayout}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0" Grid.Row="0">
+                                        <Label Text="Empleado:" FontSize="Small" FontAttributes="Bold"/>
+                                        <Label Text="{Binding IdEmployee}" FontSize="Small"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="0">
+                                        <Label Text="ODP" FontSize="Small" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Odp}" FontSize="Small"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="2" Grid.Row="0" >
+                                        <Label Text="Cantidad:" FontSize="Small" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Quantity}" FontSize="Small"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="1" >
+                                        <Label Text="Status:" FontSize="Small" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Status}" FontSize="Small"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="1">
+                                        <Label Text="Proceso:" FontSize="Small" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Process}" FontSize="Small"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="2" >
+                                        <Label Text="Maquina:" FontSize="Small" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Machine}" FontSize="Small"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="2" >
+                                        <Label Text="Fecha" FontSize="Small" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Date}" FontSize="Small"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="2" Grid.Row="2">
+                                        <Label Text="Hora" FontSize="Small" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Hour}" FontSize="Small"/>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="2" Grid.Column="0" Style="{StaticResource FrameCardViewStyleHeader}">
+                    <StackLayout Style="{StaticResource itemsCardViewStackLayoutStyle}">
+                        <StackLayout Style="{StaticResource itemsInsideCardViewStackLayoutStyle}">
+                            <StackLayout Style="{StaticResource detailsStackLayout}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout Grid.Column="0" Grid.Row="0" VerticalOptions="Center">
+                                        <Label Text="Cons:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="0">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="1" VerticalOptions="Center">
+                                        <Label Text="Cota:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="1" >
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="2" VerticalOptions="Center">
+                                        <Label Text=" - :" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="2" >
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="3" VerticalOptions="Center">
+                                        <Label Text="Medida:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold" />
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="3">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="4" VerticalOptions="Center">
+                                        <Label Text=" + " FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="4">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="5" VerticalOptions="Center">
+                                        <Label Text=" - " FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="5">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="6" VerticalOptions="Center">
+                                        <Label Text="Tipo:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="6">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="7" VerticalOptions="Center">
+                                        <Label Text="Crt:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="7">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="8" VerticalOptions="Center">
+                                        <Label Text="Real:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="8">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="9" VerticalOptions="Center">
+                                        <Label Text="Ok:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="9">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="10" VerticalOptions="Center">
+                                        <Label Text="Pro:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="10">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="11" VerticalOptions="Center">
+                                        <Label Text="Proceso:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="11">
+                                        <Entry HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="0" Grid.Row="12" VerticalOptions="Center">
+                                        <Label Text="Comentario:" FontSize="Small" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Grid.Row="12">
+                                        <Editor HorizontalOptions="FillAndExpand"/>
+                                    </StackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout Grid.Row="3" Grid.Column="0" Padding="30,24,30,24">
+                    <Button  
+                        Text="GUARDAR" 
+                        Command="{Binding SaveInfoCommand}"
+                        BackgroundColor="{StaticResource Primary}"
+                        TextColor="White"/>
+                    
+                </StackLayout>
+                
+
+
+            </Grid>
+        </ScrollView>
+       
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="CodigoBarrasDemo.Views.LoginPage"
+             xmlns:vm="clr-namespace:CodigoBarrasDemo.ViewModels"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <Color x:Key="Caqui">#e0d8b0</Color>
+            <Color x:Key="Yellow">#F9BB2A</Color>
+            <!-- Light colors -->
+            <Color x:Key="LightPrimaryColor">WhiteSmoke</Color>
+            <Color x:Key="LightSecondaryColor">Black</Color>
+
+            <!-- Dark colors -->
+            <Color x:Key="DarkPrimaryColor">Teal</Color>
+            <Color x:Key="DarkSecondaryColor">Black</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Column="0" Grid.Row="0">
+                <StackLayout BackgroundColor="#22398C" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                        <ContentView Padding="0,60,0,120" VerticalOptions="FillAndExpand">
+                            <StackLayout  
+                                   HeightRequest="200"
+                                   WidthRequest="200"
+                                   HorizontalOptions="Center"
+                                   Padding="0"
+                                   BackgroundColor="#22398C">
+                                <Image Source="logo_konecta.jpg" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="200" WidthRequest="200"/>
+                            </StackLayout>
+                        </ContentView>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <Frame Grid.Column="0" 
+                   Grid.Row="1"
+                   CornerRadius="30"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   Margin="10,50,10,0">
+                <Grid>
+                    <StackLayout Grid.Column="0" Grid.Row="0" Padding="10,50,10,0" >
+                        <Entry Placeholder="Usuario" 
+                               Text="{Binding User}" 
+                               FontSize="Title" 
+                               TextColor="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}"
+                               PlaceholderColor="Gray"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="0" Grid.Row="1" Padding="10,20,10,90">
+                        <Entry 
+                            Placeholder="Contraseña" 
+                            Text="{Binding Password}" 
+                            FontSize="Title" 
+                            TextColor="{AppThemeBinding Light={StaticResource LightSecondaryColor}, Dark={StaticResource DarkSecondaryColor}}"
+                            PlaceholderColor="Gray"
+                            TextTransform="Uppercase"
+                            IsPassword="True">
+                            <Entry.Keyboard>
+                                <Keyboard x:FactoryMethod="Create">
+                                    <x:Arguments>
+                                        <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                    </x:Arguments>
+                                </Keyboard>
+                            </Entry.Keyboard>
+                        </Entry>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <StackLayout Padding="50,-20,50,0" VerticalOptions="Center" HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="2" >
+                <Button CornerRadius="20" VerticalOptions="Center" Text="Iniciar" FontSize="Large" FontAttributes="Bold" Command="{Binding LoginCommand}" BackgroundColor="#6e6e6d"/>
+            </StackLayout>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>
